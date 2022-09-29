@@ -10,10 +10,12 @@ from os.path import isdir
 def do_pack():
     """ Function to generate archive of web_static """
 
-    local('mkdir -p versions/')
-    date = datetime.now().strftime('%Y%m%d%H%M%S')
-    name_of_archive = "versions/web_static_{}.tgz".format(date)
-    local("tar -cvzf {} web_static/".format(name_of_archive))
-    if isdir(name_of_archive) is False:
+    try:
+        date = datetime.now().strftime('%Y%m%d%H%M%S')
+        if not isdir('versions'):
+            local('mkdir versions')
+        name_of_archive = "versions/web_static_{}.tgz".format(date)
+        local("tar -cvzf {} web_static/".format(name_of_archive))
+        return name_of_archive
+    except Exception:
         return None
-    return name_of_archive
