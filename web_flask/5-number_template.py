@@ -27,7 +27,7 @@ def c_text(text):
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text='is cool'):
     """ Function called with /python/ route """
-    if text is not 'is cool':
+    if text != 'is cool':
         text = text.replace('_', ' ')
     return 'Python %s' % text
 
@@ -38,10 +38,10 @@ def number(n):
     return '%d is a number' % n
 
 
-@app.route('/number_template/<int: n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    """ Function called with /number_template/ route """)
-    return render_template('5-number.html', n=n)
+    """ Function called with /number_template/ route """
+    return render_template('5-number.html', number=n)
 
 
 if __name__ == '__main__':
